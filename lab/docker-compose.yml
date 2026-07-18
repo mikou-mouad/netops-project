@@ -6,6 +6,7 @@ services:
     container_name: siege-router
     environment:
       - SITE_NAME=siege
+      - API_TOKEN=${API_TOKEN}
     ports:
       - "5001:5000"
     networks:
@@ -18,6 +19,7 @@ services:
     container_name: agence1-router
     environment:
       - SITE_NAME=agence1
+      - API_TOKEN=${API_TOKEN}
     ports:
       - "5002:5000"
     networks:
@@ -30,6 +32,7 @@ services:
     container_name: agence2-router
     environment:
       - SITE_NAME=agence2
+      - API_TOKEN=${API_TOKEN}
     ports:
       - "5003:5000"
     networks:

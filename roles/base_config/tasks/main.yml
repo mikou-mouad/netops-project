@@ -10,10 +10,12 @@
   ansible.builtin.debug:
     msg: "Site {{ health_result.json.site }} : {{ health_result.json.status }}"
 
-- name: Recuperer l'etat des interfaces du site
+- name: Recuperer l'etat des interfaces du site (authentifie)
   ansible.builtin.uri:
     url: "{{ api_url }}/api/devices/{{ device_id_prefix }}-{{ inventory_hostname }}-01/interfaces"
     method: GET
+    headers:
+      X-Api-Token: "{{ vault_api_token }}"
     return_content: yes
   register: interfaces_result
 
