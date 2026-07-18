@@ -1,7 +1,7 @@
 ---
 interfaces:
 - name: GigabitEthernet0/1
-  description: Lien vers coeur de reseau
+  description: Lien vers coeur de reseau - MAJ
   enabled: up
   vlan-id: 10
 - name: GigabitEthernet0/2
