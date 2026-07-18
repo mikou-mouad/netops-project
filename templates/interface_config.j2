@@ -1,0 +1,18 @@
+! Configuration generee automatiquement - NE PAS EDITER A LA MAIN
+! Site : {{ inventory_hostname }}
+!
+hostname {{ inventory_hostname }}
+!
+{% for iface in interfaces %}
+interface {{ iface.name }}
+ description {{ iface.description }}
+ switchport access vlan {{ iface['vlan-id'] }}
+{% if iface.enabled == 'down' %}
+ shutdown
+{% else %}
+ no shutdown
+{% endif %}
+!
+{% endfor %}
+ntp server {{ ntp_server }}
+banner motd ^ {{ banner_motd }} ^

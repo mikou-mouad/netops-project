@@ -1,0 +1,79 @@
+2026-07-18 12:29:46,719 [INFO] Requete GET vers http://localhost:5000/api/devices/router-siege-01/interfaces
+2026-07-18 12:29:48,771 [INFO] Reponse recue pour router-siege-01 : 3 interfaces
+2026-07-18 12:29:48,771 [INFO] Requete GET vers http://localhost:5000/api/devices/router-siege-01/interfaces
+2026-07-18 12:29:50,819 [INFO] Reponse recue pour router-siege-01 : 3 interfaces
+2026-07-18 12:29:50,819 [WARNING] Interfaces down sur router-siege-01 : ['GigabitEthernet0/2']
+2026-07-18 12:30:21,522 [INFO] Requete GET vers http://localhost:5000/api/devices/router-siege-01/interfaces
+2026-07-18 12:30:25,570 [ERROR] Echec de la requete API : HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/devices/router-siege-01/interfaces (Caused by NewConnectionError("HTTPConnection(host='localhost', port=5000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-07-18 12:43:32,343 [INFO] netops_client.client: Requete GET vers http://localhost:5000/api/devices/router-siege-01/interfaces
+2026-07-18 12:43:34,377 [INFO] netops_client.client: Reponse recue pour router-siege-01 : 3 interfaces
+2026-07-18 12:43:34,377 [INFO] netops_client.client: Requete GET vers http://localhost:5000/api/devices/router-siege-01/interfaces
+2026-07-18 12:43:36,399 [INFO] netops_client.client: Reponse recue pour router-siege-01 : 3 interfaces
+2026-07-18 12:43:36,399 [WARNING] netops_client.client: Interfaces down sur router-siege-01 : ['GigabitEthernet0/2']
+2026-07-18 13:35:23,331 [INFO] netops_client.client: Requete GET vers http://localhost:5001/api/devices/router-siege-01/interfaces
+2026-07-18 13:35:23,343 [INFO] netops_client.client: Reponse recue pour router-siege-01 : 3 interfaces
+2026-07-18 13:35:23,344 [WARNING] netops_client.client: Interfaces down sur router-siege-01 : ['GigabitEthernet0/2']
+2026-07-18 13:35:23,344 [INFO] netops_client.client: Requete GET vers http://localhost:5002/api/devices/router-agence1-01/interfaces
+2026-07-18 13:35:23,371 [INFO] netops_client.client: Reponse recue pour router-agence1-01 : 3 interfaces
+2026-07-18 13:35:23,371 [WARNING] netops_client.client: Interfaces down sur router-agence1-01 : ['GigabitEthernet0/2']
+2026-07-18 13:35:23,372 [INFO] netops_client.client: Requete GET vers http://localhost:5003/api/devices/router-agence2-01/interfaces
+2026-07-18 13:35:23,387 [INFO] netops_client.client: Reponse recue pour router-agence2-01 : 3 interfaces
+2026-07-18 13:35:23,387 [WARNING] netops_client.client: Interfaces down sur router-agence2-01 : ['GigabitEthernet0/2']
+2026-07-18 17:57:06,731 [INFO] netops_client.diagnostics: siege : joignable (34.1 ms)
+2026-07-18 17:57:06,731 [INFO] netops_client.client: Requete GET vers http://localhost:5001/api/devices/router-siege-01/interfaces
+2026-07-18 17:57:06,747 [INFO] netops_client.client: Reponse recue pour router-siege-01 : 2 interfaces
+2026-07-18 17:57:06,747 [WARNING] netops_client.client: Interfaces down sur router-siege-01 : ['GigabitEthernet0/2']
+2026-07-18 17:57:06,763 [INFO] netops_client.diagnostics: agence1 : joignable (15.2 ms)
+2026-07-18 17:57:06,763 [INFO] netops_client.client: Requete GET vers http://localhost:5002/api/devices/router-agence1-01/interfaces
+2026-07-18 17:57:06,777 [INFO] netops_client.client: Reponse recue pour router-agence1-01 : 2 interfaces
+2026-07-18 17:57:06,778 [WARNING] netops_client.client: Interfaces down sur router-agence1-01 : ['GigabitEthernet0/2']
+2026-07-18 17:57:06,794 [INFO] netops_client.diagnostics: agence2 : joignable (15.7 ms)
+2026-07-18 17:57:06,794 [INFO] netops_client.client: Requete GET vers http://localhost:5003/api/devices/router-agence2-01/interfaces
+2026-07-18 17:57:06,800 [INFO] netops_client.client: Reponse recue pour router-agence2-01 : 2 interfaces
+2026-07-18 17:57:06,800 [WARNING] netops_client.client: Interfaces down sur router-agence2-01 : ['GigabitEthernet0/2']
+2026-07-18 17:58:02,683 [INFO] netops_client.diagnostics: siege : joignable (10.3 ms)
+2026-07-18 17:58:02,683 [INFO] netops_client.client: Requete GET vers http://localhost:5001/api/devices/router-siege-01/interfaces
+2026-07-18 17:58:02,704 [INFO] netops_client.client: Reponse recue pour router-siege-01 : 2 interfaces
+2026-07-18 17:58:02,705 [WARNING] netops_client.client: Interfaces down sur router-siege-01 : ['GigabitEthernet0/2']
+2026-07-18 17:58:02,720 [INFO] netops_client.diagnostics: agence1 : joignable (15.1 ms)
+2026-07-18 17:58:02,721 [INFO] netops_client.client: Requete GET vers http://localhost:5002/api/devices/router-agence1-01/interfaces
+2026-07-18 17:58:02,727 [INFO] netops_client.client: Reponse recue pour router-agence1-01 : 2 interfaces
+2026-07-18 17:58:02,727 [WARNING] netops_client.client: Interfaces down sur router-agence1-01 : ['GigabitEthernet0/2']
+2026-07-18 17:58:06,902 [ERROR] netops_client.client: Echec du health check : HTTPConnectionPool(host='localhost', port=5003): Max retries exceeded with url: /health (Caused by NewConnectionError("HTTPConnection(host='localhost', port=5003): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-07-18 17:58:06,902 [ERROR] netops_client.diagnostics: agence2 : injoignable (Site injoignable : HTTPConnectionPool(host='localhost', port=5003): Max retries exceeded with url: /health (Caused by NewConnectionError("HTTPConnection(host='localhost', port=5003): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it")))
+2026-07-18 18:00:08,953 [INFO] netops_client.diagnostics: siege : joignable (30.6 ms)
+2026-07-18 18:00:08,953 [INFO] netops_client.client: Requete GET vers http://localhost:5001/api/devices/router-siege-01/interfaces
+2026-07-18 18:00:08,969 [INFO] netops_client.client: Reponse recue pour router-siege-01 : 2 interfaces
+2026-07-18 18:00:08,969 [WARNING] netops_client.client: Interfaces down sur router-siege-01 : ['GigabitEthernet0/2']
+2026-07-18 18:00:08,978 [INFO] netops_client.diagnostics: agence1 : joignable (8.5 ms)
+2026-07-18 18:00:08,979 [INFO] netops_client.client: Requete GET vers http://localhost:5002/api/devices/router-agence1-01/interfaces
+2026-07-18 18:00:08,987 [INFO] netops_client.client: Reponse recue pour router-agence1-01 : 2 interfaces
+2026-07-18 18:00:08,987 [WARNING] netops_client.client: Interfaces down sur router-agence1-01 : ['GigabitEthernet0/2']
+2026-07-18 18:00:09,018 [INFO] netops_client.diagnostics: agence2 : joignable (30.4 ms)
+2026-07-18 18:00:09,018 [INFO] netops_client.client: Requete GET vers http://localhost:5003/api/devices/router-agence2-01/interfaces
+2026-07-18 18:00:09,024 [INFO] netops_client.client: Reponse recue pour router-agence2-01 : 2 interfaces
+2026-07-18 18:00:09,024 [WARNING] netops_client.client: Interfaces down sur router-agence2-01 : ['GigabitEthernet0/2']
+2026-07-18 18:01:32,872 [INFO] netops_client.diagnostics: siege : joignable (11.3 ms)
+2026-07-18 18:01:32,873 [INFO] netops_client.client: Requete GET vers http://localhost:5001/api/devices/router-siege-01/interfaces
+2026-07-18 18:01:32,879 [ERROR] netops_client.client: Authentification refusee sur http://localhost:5001/api/devices/router-siege-01/interfaces
+2026-07-18 18:01:32,880 [ERROR] netops_client.diagnostics: siege : Authentification refusee (token invalide ou manquant)
+2026-07-18 18:01:32,904 [INFO] netops_client.diagnostics: agence1 : joignable (23.6 ms)
+2026-07-18 18:01:32,904 [INFO] netops_client.client: Requete GET vers http://localhost:5002/api/devices/router-agence1-01/interfaces
+2026-07-18 18:01:32,919 [INFO] netops_client.client: Reponse recue pour router-agence1-01 : 2 interfaces
+2026-07-18 18:01:32,920 [WARNING] netops_client.client: Interfaces down sur router-agence1-01 : ['GigabitEthernet0/2']
+2026-07-18 18:01:32,936 [INFO] netops_client.diagnostics: agence2 : joignable (15.4 ms)
+2026-07-18 18:01:32,936 [INFO] netops_client.client: Requete GET vers http://localhost:5003/api/devices/router-agence2-01/interfaces
+2026-07-18 18:01:32,942 [INFO] netops_client.client: Reponse recue pour router-agence2-01 : 2 interfaces
+2026-07-18 18:01:32,942 [WARNING] netops_client.client: Interfaces down sur router-agence2-01 : ['GigabitEthernet0/2']
+2026-07-18 18:07:44,271 [INFO] netops_client.diagnostics: siege : joignable (30.7 ms)
+2026-07-18 18:07:44,271 [INFO] netops_client.client: Requete GET vers http://localhost:5001/api/devices/router-siege-01/interfaces
+2026-07-18 18:07:44,285 [INFO] netops_client.client: Reponse recue pour router-siege-01 : 2 interfaces
+2026-07-18 18:07:44,286 [WARNING] netops_client.client: Interfaces down sur router-siege-01 : ['GigabitEthernet0/2']
+2026-07-18 18:07:44,374 [INFO] netops_client.diagnostics: agence1 : joignable (88.1 ms)
+2026-07-18 18:07:44,375 [INFO] netops_client.client: Requete GET vers http://localhost:5002/api/devices/router-agence1-01/interfaces
+2026-07-18 18:07:44,380 [INFO] netops_client.client: Reponse recue pour router-agence1-01 : 2 interfaces
+2026-07-18 18:07:44,380 [WARNING] netops_client.client: Interfaces down sur router-agence1-01 : ['GigabitEthernet0/2']
+2026-07-18 18:07:44,387 [INFO] netops_client.diagnostics: agence2 : joignable (6.4 ms)
+2026-07-18 18:07:44,388 [INFO] netops_client.client: Requete GET vers http://localhost:5003/api/devices/router-agence2-01/interfaces
+2026-07-18 18:07:44,411 [INFO] netops_client.client: Reponse recue pour router-agence2-01 : 2 interfaces
+2026-07-18 18:07:44,412 [WARNING] netops_client.client: Interfaces down sur router-agence2-01 : ['GigabitEthernet0/2']
