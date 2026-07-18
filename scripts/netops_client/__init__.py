@@ -1,5 +1,3 @@
-from .client import NetworkClient
-from .exceptions import NetworkAPIError
-from .diagnostics import diagnose_site
+from .dnac_client import DNACClient, DNACError
 
-__all__ = ["NetworkClient", "NetworkAPIError", "diagnose_site"]
+__all__ = ["DNACClient", "DNACError"]
