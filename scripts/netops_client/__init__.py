@@ -1,3 +1,3 @@
-from .apic_client import APICClient, ACIError
+from .vmanage_client import VManageClient, VManageError
 
-__all__ = ["APICClient", "ACIError"]
+__all__ = ["VManageClient", "VManageError"]
