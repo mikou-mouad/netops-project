@@ -58,3 +58,31 @@ class VManageClient:
         if response.status_code != 200:
             raise VManageError(f"Erreur OMP summary : {response.text}")
         return response.json()["data"]
+
+    def create_policy(self, policy_name, target_sites, rules):
+        url = f"{self.base_url}/dataservice/template/policy/vsmart"
+        body = {"policyName": policy_name, "targetSites": target_sites, "rules": rules}
+        response = self.session.post(url, headers=self._headers(), json=body, timeout=self.timeout)
+        if response.status_code != 200:
+            raise VManageError(f"Echec de la creation de la policy : {response.text}")
+        return response.json()
+
+    def wait_for_action(self, process_id, max_attempts=6, delay=1):
+        import time
+        url = f"{self.base_url}/dataservice/device/action/status/{process_id}"
+        for _ in range(max_attempts):
+            response = self.session.get(url, headers=self._headers(), timeout=self.timeout)
+            if response.status_code != 200:
+                raise VManageError(f"Erreur de suivi d'activation : {response.text}")
+            status = response.json()["data"]["status"]
+            if status != "IN_PROGRESS":
+                return status
+            time.sleep(delay)
+        raise VManageError(f"Activation {process_id} toujours en cours apres {max_attempts} tentatives")
+
+    def list_policies(self):
+        url = f"{self.base_url}/dataservice/template/policy/vsmart"
+        response = self.session.get(url, headers=self._headers(), timeout=self.timeout)
+        if response.status_code != 200:
+            raise VManageError(f"Erreur de listage des policies : {response.text}")
+        return response.json()["data"]
