@@ -1,13 +1,3 @@
 ---
-organisation: nexacorp
-environnement: dev
-sites:
-  - nom: siege
-    role: hub
-  - nom: agence1
-    role: spoke
-  - nom: agence2
-    role: spoke
-contributeurs:
-  - prenom: mouad
-    role: netops-student
+ntp_server: 10.0.0.1
+banner_motd: "Acces reserve au personnel autorise - NexaCorp"
