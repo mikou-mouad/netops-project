@@ -6,5 +6,5 @@ interfaces:
   vlan-id: 10
 - name: GigabitEthernet0/2
   description: Reserve
-  enabled: down
+  enabled: up
   vlan-id: 20

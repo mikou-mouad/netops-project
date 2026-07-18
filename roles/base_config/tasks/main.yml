@@ -10,20 +10,12 @@
   ansible.builtin.debug:
     msg: "Site {{ health_result.json.site }} : {{ health_result.json.status }}"
 
-- name: Recuperer l'etat des interfaces du site (authentifie)
-  ansible.builtin.uri:
-    url: "{{ api_url }}/api/devices/{{ device_id_prefix }}-{{ inventory_hostname }}-01/interfaces"
-    method: GET
-    headers:
-      X-Api-Token: "{{ vault_api_token }}"
-    return_content: yes
-  register: interfaces_result
+- name: Verifier chaque interface avec gestion complete des exceptions
+  ansible.builtin.include_tasks: check_interface.yml
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
 
-- name: Identifier les interfaces en panne
-  ansible.builtin.set_fact:
-    interfaces_down: "{{ interfaces_result.json.interfaces | dict2items | selectattr('value.status', 'equalto', 'down') | map(attribute='key') | list }}"
-
-- name: Alerter si des interfaces sont en panne
+- name: Afficher le bilan des interfaces en echec sur ce site
   ansible.builtin.debug:
-    msg: "ATTENTION sur {{ inventory_hostname }} : interfaces en panne -> {{ interfaces_down }}"
-  when: interfaces_down | length > 0
+    msg: "Bilan {{ inventory_hostname }} : {{ interfaces_en_echec | default([]) | length }} interface(s) en echec -> {{ interfaces_en_echec | default([]) }}"
