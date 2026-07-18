@@ -1,20 +1,9 @@
-import logging
 import requests
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        logging.FileHandler("scripts/logs_network_client.log"),
-        logging.StreamHandler()
-    ]
-)
-logger = logging.getLogger("network_client")
+from .exceptions import NetworkAPIError
+from .logger_config import setup_logger
 
-
-class NetworkAPIError(Exception):
-    """Erreur levee lorsque l'API reseau repond en erreur."""
-    pass
+logger = setup_logger(__name__)
 
 
 class NetworkClient:
@@ -44,14 +33,3 @@ class NetworkClient:
         if down:
             logger.warning(f"Interfaces down sur {device_id} : {down}")
         return down
-
-
-if __name__ == "__main__":
-    client = NetworkClient(base_url="http://localhost:5000")
-
-    interfaces = client.get_interfaces("router-siege-01")
-    for name, info in interfaces.items():
-        print(f"{name} : {info['status']} (ip={info['ip']}, vlan={info['vlan']})")
-
-    down = client.count_interfaces_down("router-siege-01")
-    print(f"\nInterfaces en panne : {down if down else 'aucune'}")
