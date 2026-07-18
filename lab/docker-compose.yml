@@ -1,0 +1,40 @@
+services:
+  siege-router:
+    build:
+      context: ..
+      dockerfile: lab/Dockerfile
+    container_name: siege-router
+    environment:
+      - SITE_NAME=siege
+    ports:
+      - "5001:5000"
+    networks:
+      - nexacorp-lab
+
+  agence1-router:
+    build:
+      context: ..
+      dockerfile: lab/Dockerfile
+    container_name: agence1-router
+    environment:
+      - SITE_NAME=agence1
+    ports:
+      - "5002:5000"
+    networks:
+      - nexacorp-lab
+
+  agence2-router:
+    build:
+      context: ..
+      dockerfile: lab/Dockerfile
+    container_name: agence2-router
+    environment:
+      - SITE_NAME=agence2
+    ports:
+      - "5003:5000"
+    networks:
+      - nexacorp-lab
+
+networks:
+  nexacorp-lab:
+    driver: bridge
