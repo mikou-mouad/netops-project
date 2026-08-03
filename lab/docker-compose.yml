@@ -1,24 +1,6 @@
 networks:
-  nexacorp-backbone:
+  nexacorp-lab:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 172.20.0.0/24
-  lan-siege:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.21.0.0/24
-  lan-agence1:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.22.0.0/24
-  lan-agence2:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.23.0.0/24
 
 services:
   siege-router:
@@ -28,22 +10,10 @@ services:
     container_name: siege-router
     environment:
       - SITE_NAME=siege
-      - API_TOKEN=${API_TOKEN}
     ports:
       - "5001:5000"
     networks:
-      nexacorp-backbone:
-        ipv4_address: 172.20.0.11
-      lan-siege:
-        ipv4_address: 172.21.0.2
-
-  siege-client:
-    image: alpine:3.20
-    container_name: siege-client
-    command: sleep infinity
-    networks:
-      lan-siege:
-        ipv4_address: 172.21.0.10
+      - nexacorp-lab
 
   agence1-router:
     build:
@@ -52,22 +22,10 @@ services:
     container_name: agence1-router
     environment:
       - SITE_NAME=agence1
-      - API_TOKEN=${API_TOKEN}
     ports:
       - "5002:5000"
     networks:
-      nexacorp-backbone:
-        ipv4_address: 172.20.0.12
-      lan-agence1:
-        ipv4_address: 172.22.0.2
-
-  agence1-client:
-    image: alpine:3.20
-    container_name: agence1-client
-    command: sleep infinity
-    networks:
-      lan-agence1:
-        ipv4_address: 172.22.0.10
+      - nexacorp-lab
 
   agence2-router:
     build:
@@ -76,19 +34,7 @@ services:
     container_name: agence2-router
     environment:
       - SITE_NAME=agence2
-      - API_TOKEN=${API_TOKEN}
     ports:
       - "5003:5000"
     networks:
-      nexacorp-backbone:
-        ipv4_address: 172.20.0.13
-      lan-agence2:
-        ipv4_address: 172.23.0.2
-
-  agence2-client:
-    image: alpine:3.20
-    container_name: agence2-client
-    command: sleep infinity
-    networks:
-      lan-agence2:
-        ipv4_address: 172.23.0.10
+      - nexacorp-lab

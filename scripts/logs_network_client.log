@@ -89,3 +89,12 @@
 2026-07-18 18:36:04,602 [INFO] netops_client.client: Requete GET vers http://localhost:5003/api/devices/router-agence2-01/interfaces
 2026-07-18 18:36:04,606 [INFO] netops_client.client: Reponse recue pour router-agence2-01 : 2 interfaces
 2026-07-18 18:36:04,607 [WARNING] netops_client.client: Interfaces down sur router-agence2-01 : ['GigabitEthernet0/2']
+2026-08-03 13:55:56,150 [INFO] netops_client.client: Requete GET vers http://localhost:5001/api/devices/router-siege-01/interfaces
+2026-08-03 13:55:56,163 [INFO] netops_client.client: Reponse recue pour router-siege-01 : 3 interfaces
+2026-08-03 13:55:56,163 [WARNING] netops_client.client: Interfaces down sur router-siege-01 : ['GigabitEthernet0/2']
+2026-08-03 13:55:56,164 [INFO] netops_client.client: Requete GET vers http://localhost:5002/api/devices/router-agence1-01/interfaces
+2026-08-03 13:55:56,168 [INFO] netops_client.client: Reponse recue pour router-agence1-01 : 3 interfaces
+2026-08-03 13:55:56,168 [WARNING] netops_client.client: Interfaces down sur router-agence1-01 : ['GigabitEthernet0/2']
+2026-08-03 13:55:56,168 [INFO] netops_client.client: Requete GET vers http://localhost:5003/api/devices/router-agence2-01/interfaces
+2026-08-03 13:55:56,173 [INFO] netops_client.client: Reponse recue pour router-agence2-01 : 3 interfaces
+2026-08-03 13:55:56,174 [WARNING] netops_client.client: Interfaces down sur router-agence2-01 : ['GigabitEthernet0/2']
