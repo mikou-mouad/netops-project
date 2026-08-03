@@ -1,0 +1,12 @@
+organisation: nexacorp
+environnement: dev
+sites:
+  - nom: siege
+    role: hub
+  - nom: agence1
+    role: spoke
+  - nom: agence2
+    role: spoke
+contributeurs:
+  - prenom: sebastien
+    role: netops-student
