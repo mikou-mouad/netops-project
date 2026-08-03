@@ -1,44 +1,38 @@
 ---
 # Post-checks : verifient l'etat APRES le deploiement.
-
-- name: "POST-CHECK : le fichier de configuration a bien ete genere"
+- name: 'POST-CHECK : le fichier de configuration a bien ete genere'
   block:
     - ansible.builtin.stat:
-        path: "{{ playbook_dir }}/../generated_configs/{{ inventory_hostname }}.cfg"
+        path: '{{ playbook_dir }}/../generated_configs/{{ inventory_hostname }}.cfg'
       register: cfg_file
-
     - ansible.builtin.assert:
-        that:
-          - cfg_file.stat.exists
-
+        that: [cfg_file.stat.exists]
     - ansible.builtin.set_fact:
         test_results: "{{ (test_results | default([])) + [{'phase': 'post', 'name': 'fichier_config_existe', 'host': inventory_hostname, 'passed': true}] }}"
   rescue:
     - ansible.builtin.set_fact:
         test_results: "{{ (test_results | default([])) + [{'phase': 'post', 'name': 'fichier_config_existe', 'host': inventory_hostname, 'passed': false}] }}"
-
-- name: "POST-CHECK : la configuration contient les invariants attendus"
+- name: 'POST-CHECK : la configuration contient les invariants attendus'
   block:
     - ansible.builtin.assert:
         that:
-          - "'ntp server' in lookup('file', playbook_dir + '/../generated_configs/' + inventory_hostname + '.cfg')"
-          - "'banner motd' in lookup('file', playbook_dir + '/../generated_configs/' + inventory_hostname + '.cfg')"
-          - "'hostname ' + inventory_hostname in lookup('file', playbook_dir + '/../generated_configs/' + inventory_hostname + '.cfg')"
-
+          - "'ntp server' in lookup('file', playbook_dir + '/../generated_configs/'\
+            \ + inventory_hostname + '.cfg')"
+          - "'banner motd' in lookup('file', playbook_dir + '/../generated_configs/'\
+            \ + inventory_hostname + '.cfg')"
+          - "'hostname ' + inventory_hostname in lookup('file', playbook_dir + '/../generated_configs/'\
+            \ + inventory_hostname + '.cfg')"
     - ansible.builtin.set_fact:
         test_results: "{{ (test_results | default([])) + [{'phase': 'post', 'name': 'invariants_presents', 'host': inventory_hostname, 'passed': true}] }}"
   rescue:
     - ansible.builtin.set_fact:
         test_results: "{{ (test_results | default([])) + [{'phase': 'post', 'name': 'invariants_presents', 'host': inventory_hostname, 'passed': false}] }}"
-
-- name: "POST-CHECK : pas de VLAN duplique entre les interfaces actives du site"
+- name: 'POST-CHECK : pas de VLAN duplique entre les interfaces actives du site'
   vars:
     vlans_actifs: "{{ interfaces | selectattr('enabled', 'equalto', 'up') | map(attribute='vlan-id') | list }}"
   block:
     - ansible.builtin.assert:
-        that:
-          - vlans_actifs | length == vlans_actifs | unique | length
-
+        that: [vlans_actifs | length == vlans_actifs | unique | length]
     - ansible.builtin.set_fact:
         test_results: "{{ (test_results | default([])) + [{'phase': 'post', 'name': 'pas_de_vlan_duplique', 'host': inventory_hostname, 'passed': true}] }}"
   rescue:

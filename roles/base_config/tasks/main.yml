@@ -1,21 +1,19 @@
 ---
 - name: Verifier que le site repond (health check)
   ansible.builtin.uri:
-    url: "{{ api_url }}/health"
+    url: '{{ api_url }}/health'
     method: GET
-    return_content: yes
+    return_content: true
   register: health_result
-
 - name: Afficher le statut du site
   ansible.builtin.debug:
-    msg: "Site {{ health_result.json.site }} : {{ health_result.json.status }}"
-
+    msg: 'Site {{ health_result.json.site }} : {{ health_result.json.status }}'
 - name: Verifier chaque interface avec gestion complete des exceptions
   ansible.builtin.include_tasks: check_interface.yml
-  loop: "{{ interfaces }}"
+  loop: '{{ interfaces }}'
   loop_control:
-    label: "{{ item.name }}"
-
+    label: '{{ item.name }}'
 - name: Afficher le bilan des interfaces en echec sur ce site
   ansible.builtin.debug:
-    msg: "Bilan {{ inventory_hostname }} : {{ interfaces_en_echec | default([]) | length }} interface(s) en echec -> {{ interfaces_en_echec | default([]) }}"
+    msg: 'Bilan {{ inventory_hostname }} : {{ interfaces_en_echec | default([]) | length }}
+      interface(s) en echec -> {{ interfaces_en_echec | default([]) }}'
