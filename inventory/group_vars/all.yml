@@ -8,5 +8,5 @@ sites:
   - nom: agence2
     role: spoke
 contributeurs:
-  - prenom: <votre-prenom>
+  - prenom: sebastien
     role: netops-student
