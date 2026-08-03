@@ -1,16 +1,15 @@
 ---
 - name: Generer les configurations reseau a partir des templates
   hosts: all
-  gather_facts: no
+  gather_facts: false
   tasks:
     - name: Creer le dossier de sortie
       ansible.builtin.file:
-        path: "{{ playbook_dir }}/../generated_configs"
+        path: '{{ playbook_dir }}/../generated_configs'
         state: directory
       run_once: true
       delegate_to: localhost
-
     - name: Generer la configuration de l'interface pour ce site
       ansible.builtin.template:
-        src: "{{ playbook_dir }}/../templates/interface_config.j2"
-        dest: "{{ playbook_dir }}/../generated_configs/{{ inventory_hostname }}.cfg"
+        src: '{{ playbook_dir }}/../templates/interface_config.j2'
+        dest: '{{ playbook_dir }}/../generated_configs/{{ inventory_hostname }}.cfg'

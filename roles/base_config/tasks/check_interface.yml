@@ -1,40 +1,38 @@
 ---
-- name: "Verifier l'interface {{ item.name }} (gestion des exceptions)"
+- name: Verifier l'interface {{ item.name }} (gestion des exceptions)
   block:
-    - name: "Interroger l'API pour {{ item.name }}"
+    - name: Interroger l'API pour {{ item.name }}
       ansible.builtin.uri:
-        url: "{{ api_url }}/api/devices/{{ device_id_prefix }}-{{ inventory_hostname }}-01/interfaces"
+        url: '{{ api_url }}/api/devices/{{ device_id_prefix }}-{{ inventory_hostname
+          }}-01/interfaces'
         method: GET
         headers:
-          X-Api-Token: "{{ vault_api_token }}"
-        return_content: yes
+          X-Api-Token: '{{ vault_api_token }}'
+        return_content: true
       register: iface_result
       until: iface_result.status == 200
       retries: 3
       delay: 2
-
-    - name: "Extraire l'etat reel de {{ item.name }}"
+    - name: Extraire l'etat reel de {{ item.name }}
       ansible.builtin.set_fact:
-        etat_reel: "{{ iface_result.json.interfaces[item.name].status }}"
-
-    - name: "Alerter si incoherence entre config souhaitee et etat reel"
+        etat_reel: '{{ iface_result.json.interfaces[item.name].status }}'
+    - name: Alerter si incoherence entre config souhaitee et etat reel
       ansible.builtin.debug:
-        msg: "INCOHERENCE sur {{ inventory_hostname }}/{{ item.name }} : configuree {{ item.enabled }} mais etat reel {{ etat_reel }}"
+        msg: 'INCOHERENCE sur {{ inventory_hostname }}/{{ item.name }} : configuree
+          {{ item.enabled }} mais etat reel {{ etat_reel }}'
       when: >
         (item.enabled == 'up' and etat_reel == 'down') or
         (item.enabled == 'down' and etat_reel == 'up')
-
   rescue:
-    - name: "Consigner l'echec de verification pour {{ item.name }}"
+    - name: Consigner l'echec de verification pour {{ item.name }}
       ansible.builtin.set_fact:
-        interfaces_en_echec: "{{ (interfaces_en_echec | default([])) + [item.name] }}"
-
-    - name: "Afficher l'erreur rencontree, sans arreter le reste du playbook"
+        interfaces_en_echec: '{{ (interfaces_en_echec | default([])) + [item.name] }}'
+    - name: Afficher l'erreur rencontree, sans arreter le reste du playbook
       ansible.builtin.debug:
-        msg: "ECHEC verification de {{ item.name }} sur {{ inventory_hostname }} : {{ ansible_failed_result.msg | default('erreur inconnue') }}"
-
+        msg: "ECHEC verification de {{ item.name }} sur {{ inventory_hostname }}\
+          \ : {{ ansible_failed_result.msg | default('erreur inconnue') }}"
   always:
-    - name: "Marquer l'interface comme traitee"
+    - name: Marquer l'interface comme traitee
       ansible.builtin.debug:
-        msg: "Interface {{ item.name }} traitee sur {{ inventory_hostname }}"
+        msg: Interface {{ item.name }} traitee sur {{ inventory_hostname }}
         verbosity: 1

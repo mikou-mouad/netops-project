@@ -1,4 +1,4 @@
 ---
 ntp_server: 10.0.0.1
-banner_motd: "Acces reserve au personnel autorise - NexaCorp"
-device_id_prefix: "router"
+banner_motd: Acces reserve au personnel autorise - NexaCorp
+device_id_prefix: router

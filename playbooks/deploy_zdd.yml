@@ -1,40 +1,39 @@
 ---
 - name: Deploiement sans coupure (canary puis rolling) des configurations reseau
   hosts: agence1,siege,agence2
-  gather_facts: no
-  serial:
-    - 1
-    - 1
-    - 1
+  gather_facts: false
+  serial: [1, 1, 1]
   any_errors_fatal: true
-
   tasks:
-    - name: "Sauvegarder et deployer la configuration ({{ inventory_hostname }})"
+    - name: Sauvegarder et deployer la configuration ({{ inventory_hostname }})
       ansible.builtin.template:
-        src: "{{ playbook_dir }}/../templates/interface_config.j2"
-        dest: "{{ playbook_dir }}/../generated_configs/{{ inventory_hostname }}.cfg"
-        backup: yes
+        src: '{{ playbook_dir }}/../templates/interface_config.j2'
+        dest: '{{ playbook_dir }}/../generated_configs/{{ inventory_hostname }}.cfg'
+        backup: true
       register: render_result
-
-    - name: "Post-check et rollback automatique en cas d'echec ({{ inventory_hostname }})"
+    - name: Post-check et rollback automatique en cas d'echec ({{ inventory_hostname }})
       block:
-        - name: "Verifier que la configuration generee respecte les invariants attendus"
+        - name: Verifier que la configuration generee respecte les invariants attendus
           ansible.builtin.assert:
             that:
-              - "'ntp server' in lookup('file', playbook_dir + '/../generated_configs/' + inventory_hostname + '.cfg')"
-              - "'banner motd' in lookup('file', playbook_dir + '/../generated_configs/' + inventory_hostname + '.cfg')"
-              - "'hostname ' + inventory_hostname in lookup('file', playbook_dir + '/../generated_configs/' + inventory_hostname + '.cfg')"
-            fail_msg: "Post-check echoue sur {{ inventory_hostname }} : configuration invalide detectee"
-            success_msg: "Post-check reussi sur {{ inventory_hostname }}"
-
+              - "'ntp server' in lookup('file', playbook_dir + '/../generated_configs/'\
+                \ + inventory_hostname + '.cfg')"
+              - "'banner motd' in lookup('file', playbook_dir + '/../generated_configs/'\
+                \ + inventory_hostname + '.cfg')"
+              - "'hostname ' + inventory_hostname in lookup('file', playbook_dir\
+                \ + '/../generated_configs/' + inventory_hostname + '.cfg')"
+            fail_msg: 'Post-check echoue sur {{ inventory_hostname }} : configuration
+              invalide detectee'
+            success_msg: Post-check reussi sur {{ inventory_hostname }}
       rescue:
-        - name: "ROLLBACK : restaurer la configuration precedente sur {{ inventory_hostname }}"
+        - name: 'ROLLBACK : restaurer la configuration precedente sur {{ inventory_hostname }}'
           ansible.builtin.copy:
-            src: "{{ render_result.backup_file }}"
-            dest: "{{ playbook_dir }}/../generated_configs/{{ inventory_hostname }}.cfg"
-            remote_src: yes
+            src: '{{ render_result.backup_file }}'
+            dest: '{{ playbook_dir }}/../generated_configs/{{ inventory_hostname
+              }}.cfg'
+            remote_src: true
           when: render_result.backup_file is defined
-
-        - name: "Arreter tout le deploiement suite a l'echec sur {{ inventory_hostname }}"
+        - name: Arreter tout le deploiement suite a l'echec sur {{ inventory_hostname }}
           ansible.builtin.fail:
-            msg: "Deploiement ZDD arrete : {{ inventory_hostname }} a echoue les post-checks. Rollback effectue. Les sites suivants ne seront PAS modifies."
+            msg: 'Deploiement ZDD arrete : {{ inventory_hostname }} a echoue les
+              post-checks. Rollback effectue. Les sites suivants ne seront PAS modifies.'

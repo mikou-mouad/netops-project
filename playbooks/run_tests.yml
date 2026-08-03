@@ -1,32 +1,29 @@
 ---
 - name: Suite de tests automatises reseau (pre-checks + post-checks)
   hosts: all
-  gather_facts: no
-
+  gather_facts: false
   tasks:
     - name: Executer les pre-checks
-      ansible.builtin.include_tasks: "{{ playbook_dir }}/../tests/pre_checks/pre_check_site.yml"
-
+      ansible.builtin.include_tasks: '{{ playbook_dir }}/../tests/pre_checks/pre_check_site.yml'
     - name: Executer les post-checks
-      ansible.builtin.include_tasks: "{{ playbook_dir }}/../tests/post_checks/post_check_site.yml"
-
+      ansible.builtin.include_tasks: '{{ playbook_dir }}/../tests/post_checks/post_check_site.yml'
     - name: Afficher le rapport de tests pour ce site
       ansible.builtin.debug:
-        msg: "{{ item.phase | upper }} [{{ 'OK' if item.passed else 'ECHEC' }}] {{ item.name }}"
-      loop: "{{ test_results }}"
+        msg: "{{ item.phase | upper }} [{{ 'OK' if item.passed else 'ECHEC' }}]\
+          \ {{ item.name }}"
+      loop: '{{ test_results }}'
       loop_control:
-        label: "{{ item.name }}"
-
+        label: '{{ item.name }}'
     - name: Calculer le bilan global de ce site
       ansible.builtin.set_fact:
-        nb_tests: "{{ test_results | length }}"
+        nb_tests: '{{ test_results | length }}'
         nb_echecs: "{{ test_results | selectattr('passed', 'equalto', false) | list | length }}"
-
     - name: Afficher le bilan final du site
       ansible.builtin.debug:
-        msg: "BILAN {{ inventory_hostname }} : {{ nb_tests | int - nb_echecs | int }}/{{ nb_tests }} tests reussis"
-
+        msg: 'BILAN {{ inventory_hostname }} : {{ nb_tests | int - nb_echecs | int }}/{{
+          nb_tests }} tests reussis'
     - name: Faire echouer le playbook si au moins un test a echoue sur ce site
       ansible.builtin.fail:
-        msg: "{{ nb_echecs }} test(s) en echec sur {{ inventory_hostname }} : deploiement a ne pas considerer comme valide"
+        msg: '{{ nb_echecs }} test(s) en echec sur {{ inventory_hostname }} : deploiement
+          a ne pas considerer comme valide'
       when: nb_echecs | int > 0

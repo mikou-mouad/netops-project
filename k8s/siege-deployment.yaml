@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,9 +23,9 @@ spec:
             - containerPort: 5000
           env:
             - name: SITE_NAME
-              value: "siege"
+              value: siege
             - name: API_TOKEN
-              value: "s3cr3t-token-nexacorp"
+              value: s3cr3t-token-nexacorp
           readinessProbe:
             httpGet:
               path: /health
