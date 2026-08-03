@@ -1,6 +1,5 @@
 import logging
 
-
 def setup_logger(name, log_file="scripts/logs_network_client.log"):
     """Cree et configure un logger reutilisable par tous les modules du package."""
     logger = logging.getLogger(name)
