@@ -21,9 +21,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Verifier la structure du projet
         run: |
-        test-f docs/branching-strategy.md
-        test-d roles
-        test-d inventory
+        test -f docs/branching-strategy.md
+        test -d roles
+        test -d inventory
         echo "Structure du projet valide"
 test:
   runs-on: ubuntu-latest
