@@ -99,3 +99,15 @@
 2026-08-03 14:55:22,747 [WARNING] netops_client.client: Interfaces down sur router-siege-01 : ['GigabitEthernet0/2']
 2026-08-03 14:56:50,579 [INFO] netops_client.client: Requete GET vers http://localhost:5000/api/devices/router-siege-01/interfaces
 2026-08-03 14:56:54,662 [ERROR] netops_client.client: Echec de la requete API : HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/devices/router-siege-01/interfaces (Caused by NewConnectionError("HTTPConnection(host='localhost', port=5000): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée"))
+2026-08-03 15:50:15,339 [INFO] netops_client.client: Requete GET vers http://localhost:5003/api/devices/router-agence2-01/interfaces
+2026-08-03 15:50:15,352 [INFO] netops_client.client: Reponse recue pour router-agence2-01 : 3 interfaces
+2026-08-03 15:50:15,353 [WARNING] netops_client.client: Interfaces down sur router-agence2-01 : ['GigabitEthernet0/2']
+2026-08-03 15:51:04,421 [INFO] netops_client.client: Requete GET vers http://localhost:5001/api/devices/router-siege-01/interfaces
+2026-08-03 15:51:04,429 [INFO] netops_client.client: Reponse recue pour router-siege-01 : 3 interfaces
+2026-08-03 15:51:04,430 [WARNING] netops_client.client: Interfaces down sur router-siege-01 : ['GigabitEthernet0/2']
+2026-08-03 15:51:04,430 [INFO] netops_client.client: Requete GET vers http://localhost:5002/api/devices/router-agence1-01/interfaces
+2026-08-03 15:51:04,436 [INFO] netops_client.client: Reponse recue pour router-agence1-01 : 3 interfaces
+2026-08-03 15:51:04,436 [WARNING] netops_client.client: Interfaces down sur router-agence1-01 : ['GigabitEthernet0/2']
+2026-08-03 15:51:04,436 [INFO] netops_client.client: Requete GET vers http://localhost:5003/api/devices/router-agence2-01/interfaces
+2026-08-03 15:51:04,441 [INFO] netops_client.client: Reponse recue pour router-agence2-01 : 3 interfaces
+2026-08-03 15:51:04,442 [WARNING] netops_client.client: Interfaces down sur router-agence2-01 : ['GigabitEthernet0/2']
