@@ -89,3 +89,12 @@
 2026-07-18 18:36:04,602 [INFO] netops_client.client: Requete GET vers http://localhost:5003/api/devices/router-agence2-01/interfaces
 2026-07-18 18:36:04,606 [INFO] netops_client.client: Reponse recue pour router-agence2-01 : 2 interfaces
 2026-07-18 18:36:04,607 [WARNING] netops_client.client: Interfaces down sur router-agence2-01 : ['GigabitEthernet0/2']
+2026-08-03 14:53:02,775 [INFO] netops_client.client: Requete GET vers http://localhost:5000/api/devices/router-siege-01/interfaces
+2026-08-03 14:53:04,802 [INFO] netops_client.client: Reponse recue pour router-siege-01 : 3 interfaces
+2026-08-03 14:53:04,803 [INFO] netops_client.client: Requete GET vers http://localhost:5000/api/devices/router-siege-01/interfaces
+2026-08-03 14:53:06,825 [INFO] netops_client.client: Reponse recue pour router-siege-01 : 3 interfaces
+2026-08-03 14:53:06,826 [WARNING] netops_client.client: Interfaces down sur router-siege-01 : ['GigabitEthernet0/2']
+2026-08-03 14:54:29,881 [INFO] netops_client.client: Requete GET vers http://localhost:5000/api/devices/router-siege-01/interfaces
+2026-08-03 14:54:33,933 [ERROR] netops_client.client: Echec de la requete API : HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/devices/router-siege-01/interfaces (Caused by NewConnectionError("HTTPConnection(host='localhost', port=5000): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée"))
+2026-08-03 14:55:27,534 [INFO] netops_client.client: Requete GET vers http://localhost:5000/api/devices/router-siege-01/interfaces
+2026-08-03 14:55:31,574 [ERROR] netops_client.client: Echec de la requete API : HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/devices/router-siege-01/interfaces (Caused by NewConnectionError("HTTPConnection(host='localhost', port=5000): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée"))
