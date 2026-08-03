@@ -89,3 +89,15 @@
 2026-07-18 18:36:04,602 [INFO] netops_client.client: Requete GET vers http://localhost:5003/api/devices/router-agence2-01/interfaces
 2026-07-18 18:36:04,606 [INFO] netops_client.client: Reponse recue pour router-agence2-01 : 2 interfaces
 2026-07-18 18:36:04,607 [WARNING] netops_client.client: Interfaces down sur router-agence2-01 : ['GigabitEthernet0/2']
+2026-08-03 13:04:46,543 [INFO] netops_client.client: Requete GET vers http://localhost:5000/api/devices/router-siege-01/interfaces
+2026-08-03 13:04:46,546 [INFO] netops_client.client: Reponse recue pour router-siege-01 : 3 interfaces
+2026-08-03 13:04:46,547 [INFO] netops_client.client: Requete GET vers http://localhost:5000/api/devices/router-siege-01/interfaces
+2026-08-03 13:04:46,550 [INFO] netops_client.client: Reponse recue pour router-siege-01 : 3 interfaces
+2026-08-03 13:04:46,550 [WARNING] netops_client.client: Interfaces down sur router-siege-01 : ['GigabitEthernet0/2']
+2026-08-03 13:04:59,328 [INFO] netops_client.client: Requete GET vers http://localhost:5000/api/devices/router-siege-01/interfaces
+2026-08-03 13:04:59,332 [INFO] netops_client.client: Reponse recue pour router-siege-01 : 3 interfaces
+2026-08-03 13:04:59,332 [INFO] netops_client.client: Requete GET vers http://localhost:5000/api/devices/router-siege-01/interfaces
+2026-08-03 13:04:59,335 [INFO] netops_client.client: Reponse recue pour router-siege-01 : 3 interfaces
+2026-08-03 13:04:59,336 [WARNING] netops_client.client: Interfaces down sur router-siege-01 : ['GigabitEthernet0/2']
+2026-08-03 13:05:09,833 [INFO] netops_client.client: Requete GET vers http://localhost:5000/api/devices/router-siege-01/interfaces
+2026-08-03 13:05:09,835 [ERROR] netops_client.client: Echec de la requete API : HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/devices/router-siege-01/interfaces (Caused by NewConnectionError("HTTPConnection(host='localhost', port=5000): Failed to establish a new connection: [Errno 111] Connection refused"))
