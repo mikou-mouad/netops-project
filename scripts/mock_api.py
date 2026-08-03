@@ -1,11 +1,11 @@
 import os
-import sys
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
 SITE_NAME = os.environ.get("SITE_NAME", "site-inconnu")
 API_TOKEN = os.environ.get("API_TOKEN", "changeme")
+POD_NAME = os.environ.get("HOSTNAME", "inconnu")
 
 INTERFACES = {
     "GigabitEthernet0/1": {"status": "up", "ip": "10.0.1.1", "vlan": 10},
@@ -19,7 +19,7 @@ def check_token():
 
 @app.route("/health")
 def health():
-    return jsonify({"site": SITE_NAME, "status": "ok"})
+    return jsonify({"site": SITE_NAME, "status": "ok", "pod": POD_NAME})
 
 
 @app.route("/api/devices/<device_id>/interfaces")
@@ -30,5 +30,4 @@ def get_interfaces(device_id):
 
 
 if __name__ == "__main__":
-    port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
-    app.run(host="0.0.0.0", port=port, debug=False)
+    app.run(host="0.0.0.0", port=5000, debug=False)
