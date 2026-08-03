@@ -8,4 +8,3 @@ interfaces:
     description: Reserve
     enabled: down
     vlan-id: 20
-    
