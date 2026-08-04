@@ -1,0 +1,5 @@
+- name: Verification et configuration de base des sites NexaCorp
+  hosts: all
+  gather_facts: no
+  roles:
+  - base_config
