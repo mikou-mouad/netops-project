@@ -1,0 +1,10 @@
+sites:
+  - nom: siege
+    role: hub
+    api_port: 5001
+  - nom: agence1
+    role: spoke
+    api_port: 5002
+  - nom: agence2
+    role: spoke
+    api_port: 5003
