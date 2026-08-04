@@ -12,24 +12,16 @@
 
 - name: Recuperer l'etat des interfaces du site
   ansible.builtin.uri:
-    url: "{{ api_url }}/api/devices/{{ device_id_prefix }}-{{ inventory_hostname }}method: GET
+    url: "{{ api_url }}/api/devices/{{ device_id_prefix }}-{{ inventory_hostname }}-01/interfaces"
+    method: GET
     return_content: yes
   register: interfaces_result
 
 - name: Identifier les interfaces en panne
   ansible.builtin.set_fact:
-    interfaces_down: "{{ interfaces_result.json.interfaces | dict2items | selectatt
+    interfaces_down: "{{ interfaces_result.json.interfaces | dict2items | selectattr('value.status', 'equalto', 'down') | map(attribute='key') | list }}"
 
 - name: Alerter si des interfaces sont en panne
   ansible.builtin.debug:
-    msg: "ATTENTION sur {{ inventory_hostname }} : interfaces en panne -> {{ interfwhen: interfaces_down | length > 0
-
-# - name: Verifier chaque interface avec gestion complete des exceptions
-#   ansible.builtin.include_tasks: check_interface.yml
-#   loop: "{{ interfaces }}"
-#   loop_control:
-#     label: "{{ item.name }}"
-# 
-# - name: Afficher le bilan des interfaces en echec sur ce site
-#   ansible.builtin.debug:
-#     msg: "Bilan {{ inventory_hostname }} : {{ interfaces_en_echec | default([]) | length }} interface(s) en echec -> {{ interfaces_en_echec | default([]) }}"
+    msg: "ATTENTION sur {{ inventory_hostname }} : interfaces en panne -> {{ interfaces_down }}"
+  when: interfaces_down | length > 0
