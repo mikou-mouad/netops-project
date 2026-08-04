@@ -1,0 +1,34 @@
+---
+- name: Verifier que le site repond (health check)
+  ansible.builtin.uri:
+    url: "{{ api_url }}/health"
+    method: GET
+    return_content: true
+  register: health_result
+
+- name: Afficher le statut du site
+  ansible.builtin.debug:
+    msg: "Site {{ health_result.json.site }} : {{ health_result.json.status }}"
+
+- name: Recuperer l'etat des interfaces du site
+  ansible.builtin.uri:
+    url: "{{ api_url }}/api/devices/{{ device_id_prefix }}-{{ inventory_hostname }}-01/interfaces"
+    method: GET
+    return_content: true
+  register: interfaces_result
+
+- name: Identifier les interfaces en panne
+  ansible.builtin.set_fact:
+    interfaces_down: >-
+      {{
+        interfaces_result.json.interfaces
+        | dict2items
+        | selectattr('value.status', 'equalto', 'down')
+        | map(attribute='key')
+        | list
+      }}
+
+- name: Alerter si des interfaces sont en panne
+  ansible.builtin.debug:
+    msg: "ATTENTION sur {{ inventory_hostname }} : interfaces en panne -> {{ interfaces_down }}"
+  when: interfaces_down | length > 0
