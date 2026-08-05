@@ -1,6 +1,6 @@
 ---
 - name: Deploiement sans coupure (canary puis rolling) des configurations reseau
-  hosts: agence1,siege,agence2
+  hosts: agence2,agence1, siege
   gather_facts: no
   serial:
     - 1
