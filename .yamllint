@@ -1,7 +1,6 @@
----
-extends: default
+extends: relaxed
 rules:
   line-length:
-    max: 180
+    max: 200
   truthy:
-    allowed-values: ['true', 'false']
+    allowed-values: ['true', 'false', 'yes', 'no']

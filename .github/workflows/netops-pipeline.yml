@@ -1,7 +1,7 @@
 ---
 name: NetOps Pipeline
 
-on:
+"on":
   push:
     branches: [dev, new-dev, staging, main, '*-jour*-tp*']
   pull_request:
