@@ -1,3 +1,4 @@
 .vault_pass
 lab/.env
 diagnostics/
+generated_configs/

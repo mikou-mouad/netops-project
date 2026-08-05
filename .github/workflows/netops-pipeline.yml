@@ -1,6 +1,6 @@
 name: NetOps Pipeline
 
-on:
+"on":
   push:
     branches: [dev, staging, main, '*-jour*-tp*']
   pull_request:
@@ -21,76 +21,84 @@ jobs:
     needs: lint
     steps:
       - uses: actions/checkout@v4
-      - name: Verifier la structure du projet
-        run: |
-          test -f docs/branching-strategy.md
-          test -d roles
-          test -d inventory
-          echo "Structure du projet valide"
+      - name: Installer yangson
+        run: pip install yangson pyyaml
+      - name: Valider les donnees reseau contre le modele YANG
+        run: python3 scripts/yang_validate.py
+      - name: Publier les host_vars generes
+        uses: actions/upload-artifact@v4
+        with:
+          name: host-vars
+          path: inventory/host_vars/
 
   test:
     runs-on: ubuntu-latest
     needs: validate
+    env:
+      API_TOKEN: ${{ secrets.API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
-      - name: Pre-checks / post-checks (placeholder)
-        run: echo "Suite de tests reseau - sera completee au Jour 3"
+      - name: Recuperer les host_vars generes par le job validate
+        uses: actions/download-artifact@v4
+        with:
+          name: host-vars
+          path: inventory/host_vars/
+      - name: Demarrer le lab
+        run: docker compose -f lab/docker-compose.yml up -d --build
+      - name: Attendre que les sites soient prets
+        run: sleep 3
+      - name: Installer Ansible
+        run: pip install ansible-core
+      - name: Pre-checks reseau
+        run: ansible-playbook --vault-password-file <(echo "${{ secrets.VAULT_PASSWORD }}") playbooks/run_pre_checks.yml
 
   deploy:
     runs-on: ubuntu-latest
     needs: test
     if: github.ref == 'refs/heads/main'
     environment: production
+    env:
+      API_TOKEN: ${{ secrets.API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
-      - name: Deploiement (placeholder)
-        run: echo "Deploiement ZDD - sera complete Jour 3 / Jour 5"
-EOFmkdir -p .github/workflows
-cat > .github/workflows/netops-pipeline.yml << 'EOF'
-name: NetOps Pipeline
+      - name: Recuperer les host_vars generes par le job validate
+        uses: actions/download-artifact@v4
+        with:
+          name: host-vars
+          path: inventory/host_vars/
+      - name: Demarrer le lab
+        run: docker compose -f lab/docker-compose.yml up -d --build
+      - name: Attendre que les sites soient prets
+        run: sleep 3
+      - name: Installer Ansible
+        run: pip install ansible-core
+      - name: Preparer le dossier de sortie
+        run: mkdir -p generated_configs
+      - name: Deploiement ZDD (canary puis rolling)
+        run: ansible-playbook --vault-password-file <(echo "${{ secrets.VAULT_PASSWORD }}") playbooks/deploy_zdd.yml
+      - name: Publier les configurations generees
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-configs
+          path: generated_configs/
 
-on:
-  push:
-    branches: [dev, staging, main, '*-jour*-tp*']
-  pull_request:
-    branches: [dev, staging, main]
-
-jobs:
-  lint:
+  post-check:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Installer yamllint
-        run: pip install yamllint
-      - name: Lint des fichiers YAML
-        run: yamllint .
-
-  validate:
-    runs-on: ubuntu-latest
-    needs: lint
-    steps:
-      - uses: actions/checkout@v4
-      - name: Verifier la structure du projet
-        run: |
-          test -f docs/branching-strategy.md
-          test -d roles
-          test -d inventory
-          echo "Structure du projet valide"
-
-  test:
-    runs-on: ubuntu-latest
-    needs: validate
-    steps:
-      - uses: actions/checkout@v4
-      - name: Pre-checks / post-checks (placeholder)
-        run: echo "Suite de tests reseau - sera completee au Jour 3"
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: test
+    needs: deploy
     if: github.ref == 'refs/heads/main'
-    environment: production
     steps:
       - uses: actions/checkout@v4
-      - name: Deploiement (placeholder)
-        run: echo "Deploiement ZDD - sera complete Jour 3 / Jour 5"
+      - name: Recuperer les host_vars generes par le job validate
+        uses: actions/download-artifact@v4
+        with:
+          name: host-vars
+          path: inventory/host_vars/
+      - name: Recuperer les configurations generees par le job deploy
+        uses: actions/download-artifact@v4
+        with:
+          name: generated-configs
+          path: generated_configs/
+      - name: Installer Ansible
+        run: pip install ansible-core
+      - name: Post-checks reseau
+        run: ansible-playbook --vault-password-file <(echo "${{ secrets.VAULT_PASSWORD }}") playbooks/run_post_checks.yml
