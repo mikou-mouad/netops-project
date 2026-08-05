@@ -3,55 +3,55 @@
 
 - name: "PRE-CHECK : le site {{ inventory_hostname }} repond (health check)"
   block:
-    - ansible.builtin.uri:
-        url: "{{ api_url }}/health"
-        method: GET
-        return_content: yes
-      register: health_probe
+  - ansible.builtin.uri:
+      url: "{{ api_url }}/health"
+      method: GET
+      return_content: yes
+    register: health_probe
 
-    - ansible.builtin.assert:
-        that:
-          - health_probe.json.status == "ok"
+  - ansible.builtin.assert:
+      that:
+      - health_probe.json.status == "ok"
   rescue:
-    - ansible.builtin.set_fact:
-        test_results: "{{ (test_results | default([])) + [{'phase': 'pre', 'name': 'site_joignable', 'host': inventory_hostname, 'passed': false}] }}"
+  - ansible.builtin.set_fact:
+      test_results: "{{ (test_results | default([])) + [{'phase': 'pre', 'name': 'site_joignable', 'host': inventory_hostname, 'passed': false}] }}"
   always:
-    - ansible.builtin.set_fact:
-        test_results: "{{ (test_results | default([])) + [{'phase': 'pre', 'name': 'site_joignable', 'host': inventory_hostname, 'passed': true}] }}"
-      when: health_probe is defined and health_probe.json.status == "ok"
+  - ansible.builtin.set_fact:
+      test_results: "{{ (test_results | default([])) + [{'phase': 'pre', 'name': 'site_joignable', 'host': inventory_hostname, 'passed': true}] }}"
+    when: health_probe is defined and health_probe.json.status == "ok"
 
 - name: "PRE-CHECK : le nombre d'interfaces attendu correspond a l'API"
   block:
-    - ansible.builtin.uri:
-        url: "{{ api_url }}/api/devices/{{ device_id_prefix }}-{{ inventory_hostname }}-01/interfaces"
-        method: GET
-        headers:
-          X-Api-Token: "{{ vault_api_token }}"
-        return_content: yes
-      register: iface_probe
+  - ansible.builtin.uri:
+      url: "{{ api_url }}/api/devices/{{ device_id_prefix }}-{{ inventory_hostname }}-01/interfaces"
+      method: GET
+      headers:
+        X-Api-Token: "{{ vault_api_token }}"
+      return_content: yes
+    register: iface_probe
 
-    - ansible.builtin.assert:
-        that:
-          - iface_probe.json.interfaces | length == interfaces | length
+  - ansible.builtin.assert:
+      that:
+      - iface_probe.json.interfaces | length == interfaces | length
 
-    - ansible.builtin.set_fact:
-        test_results: "{{ (test_results | default([])) + [{'phase': 'pre', 'name': 'nombre_interfaces_coherent', 'host': inventory_hostname, 'passed': true}] }}"
+  - ansible.builtin.set_fact:
+      test_results: "{{ (test_results | default([])) + [{'phase': 'pre', 'name': 'nombre_interfaces_coherent', 'host': inventory_hostname, 'passed': true}] }}"
   rescue:
-    - ansible.builtin.set_fact:
-        test_results: "{{ (test_results | default([])) + [{'phase': 'pre', 'name': 'nombre_interfaces_coherent', 'host': inventory_hostname, 'passed': false}] }}"
+  - ansible.builtin.set_fact:
+      test_results: "{{ (test_results | default([])) + [{'phase': 'pre', 'name': 'nombre_interfaces_coherent', 'host': inventory_hostname, 'passed': false}] }}"
 
 - name: "PRE-CHECK : tous les VLAN sont dans la plage autorisee (1-4094)"
   block:
-    - ansible.builtin.assert:
-        that:
-          - item['vlan-id'] >= 1
-          - item['vlan-id'] <= 4094
-      loop: "{{ interfaces }}"
-      loop_control:
-        label: "{{ item.name }}"
+  - ansible.builtin.assert:
+      that:
+      - item['vlan-id'] >= 1
+      - item['vlan-id'] <= 4094
+    loop: "{{ interfaces }}"
+    loop_control:
+      label: "{{ item.name }}"
 
-    - ansible.builtin.set_fact:
-        test_results: "{{ (test_results | default([])) + [{'phase': 'pre', 'name': 'vlans_dans_la_plage', 'host': inventory_hostname, 'passed': true}] }}"
+  - ansible.builtin.set_fact:
+      test_results: "{{ (test_results | default([])) + [{'phase': 'pre', 'name': 'vlans_dans_la_plage', 'host': inventory_hostname, 'passed': true}] }}"
   rescue:
-    - ansible.builtin.set_fact:
-        test_results: "{{ (test_results | default([])) + [{'phase': 'pre', 'name': 'vlans_dans_la_plage', 'host': inventory_hostname, 'passed': false}] }}"
+  - ansible.builtin.set_fact:
+      test_results: "{{ (test_results | default([])) + [{'phase': 'pre', 'name': 'vlans_dans_la_plage', 'host': inventory_hostname, 'passed': false}] }}"
