@@ -33,7 +33,7 @@
         msg: "Deploiement ZDD arrete : {{ inventory_hostname }} a echoue les post-checks. Rollback effectue. Les sites suivants ne seront PAS modifies."
 
 - name: "Rolling : reste des sites de l'inventaire, un par un"
-  hosts: "nexacorp:!agence1"
+  hosts: "all:!agence1"
   gather_facts: no
   serial: 1
   any_errors_fatal: true

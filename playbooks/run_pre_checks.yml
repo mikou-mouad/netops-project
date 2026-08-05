@@ -1,6 +1,6 @@
 ---
 - name: Pre-checks avant deploiement
-  hosts: nexacorp
+  hosts: all
   gather_facts: no
   tasks:
   - name: Executer les pre-checks

@@ -1,6 +1,6 @@
 ---
 - name: Post-checks apres deploiement
-  hosts: nexacorp
+  hosts: all
   gather_facts: no
   tasks:
   - name: Executer les post-checks
