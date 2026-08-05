@@ -26,6 +26,11 @@ jobs:
         run: pip install yangson pyyaml
       - name: Valider les donnees reseau contre le modele YANG
         run: python3 scripts/yang_validate.py
+      - name: Publier les host_vars generes
+        uses: actions/upload-artifact@v4
+        with:
+          name: host-vars
+          path: inventory/host_vars/
 
   test:
     runs-on: ubuntu-latest
@@ -34,6 +39,11 @@ jobs:
       API_TOKEN: ${{ secrets.API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
+      - name: Recuperer les host_vars generes par le job validate
+        uses: actions/download-artifact@v4
+        with:
+          name: host-vars
+          path: inventory/host_vars/
       - name: Demarrer le lab
         run: docker compose -f lab/docker-compose.yml up -d --build
       - name: Attendre que les sites soient prets
@@ -52,6 +62,11 @@ jobs:
       API_TOKEN: ${{ secrets.API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
+      - name: Recuperer les host_vars generes par le job validate
+        uses: actions/download-artifact@v4
+        with:
+          name: host-vars
+          path: inventory/host_vars/
       - name: Demarrer le lab
         run: docker compose -f lab/docker-compose.yml up -d --build
       - name: Attendre que les sites soient prets
