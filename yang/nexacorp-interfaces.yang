@@ -1,30 +1,40 @@
 module nexacorp-interfaces {
+  yang-version 1.1;
   namespace "urn:nexacorp:interfaces";
-  prefix nci;
-  list site {
+  prefix "nxc-if";
+  organization "NexaCorp";
+  description "Modele YANG simplifie des interfaces reseau NexaCorp.";
+
+  typedef admin-state {
+    type enumeration {
+      enum up;
+      enum down;
+    }
+    description "Etat administratif souhaite pour l'interface.";
+  }
+
+  list interface {
     key "name";
+    description "Une interface reseau geree sur un site NexaCorp.";
     leaf name {
       type string;
+      description "Nom de l'interface, ex: GigabitEthernet0/1.";
     }
-    list interface {
-      key "name";
-      leaf name {
-        type string;
+    leaf description {
+      type string;
+      description "Description libre de l'interface.";
+    }
+    leaf enabled {
+      type admin-state;
+      default up;
+      description "Etat administratif souhaite : up ou down.";
+    }
+    leaf vlan-id {
+      type uint16 {
+        range "1..4094";
       }
-      leaf description {
-        type string;
-      }
-      leaf enabled {
-        type enumeration {
-          enum up;
-          enum down;
-        }
-      }
-      leaf vlan-id {
-        type uint16 {
-          range "1..4094";
-        }
-      }
+      mandatory true;
+      description "Identifiant VLAN associe a l'interface.";
     }
   }
 }

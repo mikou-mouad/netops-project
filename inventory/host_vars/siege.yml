@@ -1,10 +1,9 @@
----
 interfaces:
-- name: GigabitEthernet0/1
-  description: Lien vers coeur de reseau - MAJ
+- description: Lien vers coeur de reseau
   enabled: up
+  name: GigabitEthernet0/1
   vlan-id: 10
-- name: GigabitEthernet0/2
-  description: Reserve
-  enabled: up
+- description: Reserve
+  enabled: down
+  name: GigabitEthernet0/2
   vlan-id: 20
