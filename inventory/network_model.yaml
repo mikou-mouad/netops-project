@@ -13,7 +13,7 @@ sites:
     interfaces:
       - name: GigabitEthernet0/1
         description: "LAN utilisateurs agence1"
-        enabled: up
+        enabled: actif
         vlan-id: 30
       - name: GigabitEthernet0/2
         description: "Reserve"
