@@ -1,0 +1,13 @@
+{
+  "ietf-yang-library:modules-state": {
+    "module-set-id": "1",
+    "module": [
+      {
+        "name": "nexacorp-interfaces",
+        "revision": "",
+        "namespace": "urn:nexacorp:interfaces",
+        "conformance-type": "implement"
+      }
+    ]
+  }
+}

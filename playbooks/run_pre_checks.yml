@@ -1,0 +1,28 @@
+---
+- name: Pre-checks avant deploiement
+  hosts: nexacorp
+  gather_facts: no
+  tasks:
+    - name: Executer les pre-checks
+      ansible.builtin.include_tasks: "{{ playbook_dir }}/../tests/pre_checks/pre_check_site.yml"
+
+    - name: Afficher le rapport de pre-checks pour ce site
+      ansible.builtin.debug:
+        msg: "{{ item.phase | upper }} [{{ 'OK' if item.passed else 'ECHEC' }}] {{ item.name }}"
+      loop: "{{ test_results }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Calculer le bilan des pre-checks pour ce site
+      ansible.builtin.set_fact:
+        nb_tests: "{{ test_results | length }}"
+        nb_echecs: "{{ test_results | selectattr('passed', 'equalto', false) | list | length }}"
+
+    - name: Afficher le bilan des pre-checks
+      ansible.builtin.debug:
+        msg: "PRE-CHECKS {{ inventory_hostname }} : {{ nb_tests | int - nb_echecs | int }}/{{ nb_tests }} reussis"
+
+    - name: Faire echouer le playbook si au moins un pre-check a echoue
+      ansible.builtin.fail:
+        msg: "{{ nb_echecs }} pre-check(s) en echec sur {{ inventory_hostname }} : deploiement annule"
+      when: nb_echecs | int > 0
