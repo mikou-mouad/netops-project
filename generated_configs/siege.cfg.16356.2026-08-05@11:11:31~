@@ -11,7 +11,7 @@ interface GigabitEthernet0/1
 interface GigabitEthernet0/2
  description Reserve
  switchport access vlan 20
- shutdown
+ no shutdown
 !
 ntp server 10.0.0.1
 banner motd ^ Acces reserve au personnel autorise - NexaCorp ^
