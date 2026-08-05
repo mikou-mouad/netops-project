@@ -27,8 +27,8 @@ sites:
         vlan-id: 40
       - name: GigabitEthernet0/2
         description: "Reserve"
-        enabled: up
-        vlan-id: 40
+        enabled: down
+        vlan-id: 20
   agence3:
     interfaces:
       - name: GigabitEthernet0/1
