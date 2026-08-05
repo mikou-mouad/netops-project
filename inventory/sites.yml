@@ -9,3 +9,6 @@ sites:
   - nom: agence2
     role: spoke
     api_port: 5003
+  - nom: agence3
+    role: spoke
+    api_port: 5004
