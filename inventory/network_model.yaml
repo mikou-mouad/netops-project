@@ -1,40 +1,41 @@
 sites:
   siege:
     interfaces:
-      - name: GigabitEthernet0/1
-        description: "Lien vers coeur de reseau"
-        enabled: up
-        vlan-id: 10
-      - name: GigabitEthernet0/2
-        description: "Reserve"
-        enabled: down
-        vlan-id: 20
+    - name: GigabitEthernet0/1
+      description: "Lien vers coeur de reseau"
+      enabled: up
+      vlan-id: 10
+    - name: GigabitEthernet0/2
+      description: "Reserve"
+      enabled: down
+      vlan-id: 20
   agence1:
     interfaces:
-      - name: GigabitEthernet0/1
-        description: "LAN utilisateurs agence1"
-        enabled: up
-        vlan-id: 30
-      - name: GigabitEthernet0/2
-        description: "Reserve"
-        enabled: down
-        vlan-id: 20
+    - name: GigabitEthernet0/1
+      description: "LAN utilisateurs agence1"
+      enabled: up
+      vlan-id: 30
+    - name: GigabitEthernet0/2
+      description: "Reserve"
+      enabled: down
+      vlan-id: 20
   agence2:
     interfaces:
-      - name: GigabitEthernet0/1
-        description: "LAN utilisateurs agence2"
-        enabled: up
-        vlan-id: 40
-      - name: GigabitEthernet0/2
-        description: "Reserve"
-        enabled: down
-        vlan-id: 20
- agence3:
-interfaces:- name: GigabitEthernet0/1
-description: "LAN utilisateurs agence3"
-enabled: up
-7
-vlan-id: 4999- name: GigabitEthernet0/2
-description: "Reserve"
-enabled: down
-vlan-id: 20
+    - name: GigabitEthernet0/1
+      description: "LAN utilisateurs agence2"
+      enabled: up
+      vlan-id: 40
+    - name: GigabitEthernet0/2
+      description: "Reserve"
+      enabled: down
+      vlan-id: 20
+  agence3:
+    interfaces:
+    - name: GigabitEthernet0/1
+      description: "LAN utilisateurs agence3"
+      enabled: up
+      vlan-id: 4999
+    - name: GigabitEthernet0/2
+      description: "Reserve"
+      enabled: down
+      vlan-id: 20
