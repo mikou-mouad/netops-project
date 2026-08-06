@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: siege-router
+  labels:
+    app: siege-router
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: siege-router
+  template:
+    metadata:
+      labels:
+        app: siege-router
+    spec:
+      containers:
+        - name: siege-router
+          image: lab-siege-router:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          env:
+            - name: SITE_NAME
+              value: "siege"
+            - name: API_TOKEN
+              value: "s3cr3t-token-nexacorp"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 2
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
