@@ -1,0 +1,23 @@
+python3 - << 'PYEOF'
+content = open('inventory/network_model.yaml').read()
+content = content.replace(
+""" agence2:
+interfaces:- name: GigabitEthernet0/1
+description: "LAN utilisateurs agence2"
+enabled: up
+vlan-id: 40
+- name: GigabitEthernet0/2
+description: "Reserve"
+enabled: down
+vlan-id: 20""",
+""" agence2:
+interfaces:- name: GigabitEthernet0/1
+description: "LAN utilisateurs agence2"
+enabled: up
+vlan-id: 40- name: GigabitEthernet0/2
+description: "Reserve"
+enabled: up
+vlan-id: 40"""
+)
+open('inventory/network_model.yaml', 'w').write(content)
+PYEOF
