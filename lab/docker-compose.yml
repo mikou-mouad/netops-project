@@ -40,8 +40,8 @@ services:
 
   agence3-router:
     build:
-    context: ..
-    dockerfile: lab/Dockerfile
+      context: ..
+      dockerfile: lab/Dockerfile
     container_name: agence3-router
     environment:
       - SITE_NAME=agence3
