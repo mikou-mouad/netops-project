@@ -43,6 +43,9 @@ jobs:
       with:
         name: host-vars
         path: inventory/host_vars/
+    - name: Generer vault.yml pour la CI (non chiffre, a partir du secret API_TOKEN)
+      run: |
+        echo "vault_api_token: ${{ secrets.API_TOKEN }}" > inventory/group_vars/all/vault.yml
     - name: Demarrer le lab
       run: docker compose -f lab/docker-compose.yml up -d --build
     - name: Attendre que les sites soient prets
@@ -66,6 +69,9 @@ jobs:
       with:
         name: host-vars
         path: inventory/host_vars/
+    - name: Generer vault.yml pour la CI (non chiffre, a partir du secret API_TOKEN)
+      run: |
+        echo "vault_api_token: ${{ secrets.API_TOKEN }}" > inventory/group_vars/all/vault.yml
     - name: Demarrer le lab
       run: docker compose -f lab/docker-compose.yml up -d --build
     - name: Attendre que les sites soient prets
