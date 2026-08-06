@@ -9,7 +9,7 @@ from yangson import DataModel
 from yangson.exceptions import YangsonException
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-MODEL_FILE = os.path.join(HERE, "..", "inventory", "network_model.yaml")
+MODEL_FILE = os.path.join(HERE, "..", "inventory", "network_model.yml")
 LIBRARY_FILE = os.path.join(HERE, "..", "yang", "yang-library.json")
 MODULE_DIR = [os.path.join(HERE, "..", "yang")]
 HOST_VARS_DIR = os.path.join(HERE, "..", "inventory", "host_vars")
