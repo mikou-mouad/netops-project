@@ -3,7 +3,7 @@ sites:
     interfaces:
     - name: GigabitEthernet0/1
       description: "Lien vers coeur de reseau"
-      enabled: up
+      enabled: actif
       vlan-id: 10
     - name: GigabitEthernet0/2
       description: "Reserve"
