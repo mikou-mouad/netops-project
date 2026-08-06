@@ -28,4 +28,4 @@ sites:
       - name: GigabitEthernet0/2
         description: "Reserve"
         enabled: down
-        vlan-id: 20
+        vlan-id: 40
