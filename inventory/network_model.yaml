@@ -29,3 +29,13 @@ sites:
         description: "Reserve"
         enabled: down
         vlan-id: 20
+  agence3:
+    interfaces:
+      - name: GigabitEthernet0/1
+        description: "LAN utilisateurs agence3"
+        enabled: up
+        vlan-id: 50
+      - name: GigabitEthernet0/2
+        description: "Reserve"
+        enabled: down
+        vlan-id: 20
