@@ -47,8 +47,8 @@ services:
       - SITE_NAME=agence3- API_TOKEN=${API_TOKEN}
     ports:
       - "5004:5000"
-  networks:
-    - nexacorp-lab
+    networks:
+      - nexacorp-lab
 
 networks:
   nexacorp-lab:
