@@ -3,26 +3,26 @@
   hosts: all
   gather_facts: no
   tasks:
-    - name: Executer les post-checks
-      ansible.builtin.include_tasks: "{{ playbook_dir }}/../tests/post_checks/post_check_site.yml"
+  - name: Executer les post-checks
+    ansible.builtin.include_tasks: "{{ playbook_dir }}/../tests/post_checks/post_check_site.yml"
 
-    - name: Afficher le rapport de post-checks pour ce site
-      ansible.builtin.debug:
-        msg: "{{ item.phase | upper }} [{{ 'OK' if item.passed else 'ECHEC' }}] {{ item.name }}"
-      loop: "{{ test_results }}"
-      loop_control:
-        label: "{{ item.name }}"
+  - name: Afficher le rapport de post-checks pour ce site
+    ansible.builtin.debug:
+      msg: "{{ item.phase | upper }} [{{ 'OK' if item.passed else 'ECHEC' }}] {{ item.name }}"
+    loop: "{{ test_results }}"
+    loop_control:
+      label: "{{ item.name }}"
 
-    - name: Calculer le bilan des post-checks pour ce site
-      ansible.builtin.set_fact:
-        nb_tests: "{{ test_results | length }}"
-        nb_echecs: "{{ test_results | selectattr('passed', 'equalto', false) | list | length }}"
+  - name: Calculer le bilan des post-checks pour ce site
+    ansible.builtin.set_fact:
+      nb_tests: "{{ test_results | length }}"
+      nb_echecs: "{{ test_results | selectattr('passed', 'equalto', false) | list | length }}"
 
-    - name: Afficher le bilan des post-checks
-      ansible.builtin.debug:
-        msg: "POST-CHECKS {{ inventory_hostname }} : {{ nb_tests | int - nb_echecs | int }}/{{ nb_tests }} reussis"
+  - name: Afficher le bilan des post-checks
+    ansible.builtin.debug:
+      msg: "POST-CHECKS {{ inventory_hostname }} : {{ nb_tests | int - nb_echecs | int }}/{{ nb_tests }} reussis"
 
-    - name: Faire echouer le playbook si au moins un post-check a echoue
-      ansible.builtin.fail:
-        msg: "{{ nb_echecs }} post-check(s) en echec sur {{ inventory_hostname }} : deploiement a ne pas considerer comme valide"
-      when: nb_echecs | int > 0
+  - name: Faire echouer le playbook si au moins un post-check a echoue
+    ansible.builtin.fail:
+      msg: "{{ nb_echecs }} post-check(s) en echec sur {{ inventory_hostname }} : deploiement a ne pas considerer comme valide"
+    when: nb_echecs | int > 0
