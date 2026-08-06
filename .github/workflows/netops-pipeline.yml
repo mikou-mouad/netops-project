@@ -2,9 +2,9 @@ name: NetOps Pipeline
 
 "on":
   push:
-    branches: [ dev, new-dev, staging, main, '*-jour*-tp*' ]
+    branches: [ dev, new-dev, staging, main, '*-jour*-tp*', 'main-*' ]
   pull_request:
-    branches: [ dev, new-dev, staging, main ]
+    branches: [ dev, new-dev, staging, main, 'main-*' ]
 
 jobs:
   lint:
