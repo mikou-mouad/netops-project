@@ -1,3 +1,25 @@
+networks:
+  nexacorp-backbone:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+  lan-siege:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/24
+  lan-agence1:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.22.0.0/24
+  lan-agence2:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.23.0.0/24
+
 services:
   siege-router:
     build:
@@ -10,7 +32,18 @@ services:
     ports:
       - "5001:5000"
     networks:
-      - nexacorp-lab
+      nexacorp-backbone:
+        ipv4_address: 172.20.0.11
+      lan-siege:
+        ipv4_address: 172.21.0.2
+
+  siege-client:
+    image: alpine:3.20
+    container_name: siege-client
+    command: sleep infinity
+    networks:
+      lan-siege:
+        ipv4_address: 172.21.0.10
 
   agence1-router:
     build:
@@ -23,7 +56,18 @@ services:
     ports:
       - "5002:5000"
     networks:
-      - nexacorp-lab
+      nexacorp-backbone:
+        ipv4_address: 172.20.0.12
+      lan-agence1:
+        ipv4_address: 172.22.0.2
+
+  agence1-client:
+    image: alpine:3.20
+    container_name: agence1-client
+    command: sleep infinity
+    networks:
+      lan-agence1:
+        ipv4_address: 172.22.0.10
 
   agence2-router:
     build:
@@ -36,8 +80,15 @@ services:
     ports:
       - "5003:5000"
     networks:
-      - nexacorp-lab
+      nexacorp-backbone:
+        ipv4_address: 172.20.0.13
+      lan-agence2:
+        ipv4_address: 172.23.0.2
 
-networks:
-  nexacorp-lab:
-    driver: bridge
+  agence2-client:
+    image: alpine:3.20
+    container_name: agence2-client
+    command: sleep infinity
+    networks:
+      lan-agence2:
+        ipv4_address: 172.23.0.10

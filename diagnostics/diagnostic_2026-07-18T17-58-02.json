@@ -1,0 +1,39 @@
+[
+  {
+    "site": "siege",
+    "timestamp": "2026-07-18T17:58:02",
+    "reachable": true,
+    "latency_ms": 10.3,
+    "auth_ok": true,
+    "interfaces_down": [
+      "GigabitEthernet0/2"
+    ],
+    "suggested_actions": [
+      "Interface(s) en panne : ['GigabitEthernet0/2'] -> verifier le cablage ou la configuration"
+    ]
+  },
+  {
+    "site": "agence1",
+    "timestamp": "2026-07-18T17:58:02",
+    "reachable": true,
+    "latency_ms": 15.1,
+    "auth_ok": true,
+    "interfaces_down": [
+      "GigabitEthernet0/2"
+    ],
+    "suggested_actions": [
+      "Interface(s) en panne : ['GigabitEthernet0/2'] -> verifier le cablage ou la configuration"
+    ]
+  },
+  {
+    "site": "agence2",
+    "timestamp": "2026-07-18T17:58:02",
+    "reachable": false,
+    "latency_ms": null,
+    "auth_ok": null,
+    "interfaces_down": [],
+    "suggested_actions": [
+      "Site injoignable : verifier que le conteneur/service tourne, verifier le reseau/port"
+    ]
+  }
+]
