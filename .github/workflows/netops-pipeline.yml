@@ -37,7 +37,7 @@ jobs:
     env:
       API_TOKEN: ${{ secrets.API_TOKEN }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v4 
     - name: Recuperer les host_vars generes par le job validate
       uses: actions/download-artifact@v4
       with:
