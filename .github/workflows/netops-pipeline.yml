@@ -55,7 +55,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: test
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/main-')
     environment: production
     env:
       API_TOKEN: ${{ secrets.API_TOKEN }}
@@ -85,7 +85,7 @@ jobs:
   post-check:
     runs-on: ubuntu-latest
     needs: deploy
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/main-')
     steps:
     - uses: actions/checkout@v4
     - name: Recuperer les host_vars generes par le job validate
