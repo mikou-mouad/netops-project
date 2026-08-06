@@ -92,3 +92,19 @@ services:
     networks:
       lan-agence2:
         ipv4_address: 172.23.0.10
+  agence3-router:
+    build:
+      context: ..
+      dockerfile: lab/Dockerfile
+    container_name: agence3-router
+    environment:
+      - SITE_NAME=agence3
+      - API_TOKEN=${API_TOKEN}
+    ports:
+      - "5004:5000"
+    networks:
+      - nexacorp-lab
+
+networks:
+  nexacorp-lab:
+    driver: bridge
