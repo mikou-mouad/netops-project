@@ -2,3 +2,5 @@
 lab/.env
 diagnostics/
 generated_configs/
+__pycache__/
+*.pyc
