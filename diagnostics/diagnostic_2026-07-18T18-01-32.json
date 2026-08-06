@@ -1,0 +1,39 @@
+[
+  {
+    "site": "siege",
+    "timestamp": "2026-07-18T18:01:32",
+    "reachable": true,
+    "latency_ms": 11.3,
+    "auth_ok": false,
+    "interfaces_down": [],
+    "suggested_actions": [
+      "Authentification refusee : verifier que le token Ansible Vault correspond a celui configure sur le site (variable API_TOKEN)"
+    ]
+  },
+  {
+    "site": "agence1",
+    "timestamp": "2026-07-18T18:01:32",
+    "reachable": true,
+    "latency_ms": 23.6,
+    "auth_ok": true,
+    "interfaces_down": [
+      "GigabitEthernet0/2"
+    ],
+    "suggested_actions": [
+      "Interface(s) en panne : ['GigabitEthernet0/2'] -> verifier le cablage ou la configuration"
+    ]
+  },
+  {
+    "site": "agence2",
+    "timestamp": "2026-07-18T18:01:32",
+    "reachable": true,
+    "latency_ms": 15.4,
+    "auth_ok": true,
+    "interfaces_down": [
+      "GigabitEthernet0/2"
+    ],
+    "suggested_actions": [
+      "Interface(s) en panne : ['GigabitEthernet0/2'] -> verifier le cablage ou la configuration"
+    ]
+  }
+]
