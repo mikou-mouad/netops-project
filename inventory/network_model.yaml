@@ -34,7 +34,7 @@ sites:
     - name: GigabitEthernet0/1
       description: "LAN utilisateurs agence3"
       enabled: up
-      vlan-id: 4999
+      vlan-id: 50
     - name: GigabitEthernet0/2
       description: "Reserve"
       enabled: down
