@@ -11,7 +11,7 @@ VALID_TOKEN = "dnac-fake-token-xyz"
 
 DEVICES = [
     {"id": "dev-siege", "hostname": "siege-router", "managementIpAddress": "10.10.10.1", "reachabilityStatus": "Reachable"},
-    {"id": "dev-agence1", "hostname": "agence1-router", "managementIpAddress": "10.10.10.2", "reachabilityStatus": "Reachable"},
+    {"id":"dev-agence1", "hostname": "agence1-router", "managementIpAddress": "10.10.10.2", "reachabilityStatus": "Unreachable"},
     {"id": "dev-agence2", "hostname": "agence2-router", "managementIpAddress": "10.10.10.3", "reachabilityStatus": "Reachable"},
 ]
 
