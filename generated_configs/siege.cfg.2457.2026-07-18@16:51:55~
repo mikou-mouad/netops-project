@@ -1,0 +1,17 @@
+! Configuration generee automatiquement - NE PAS EDITER A LA MAIN
+! Site : siege
+!
+hostname siege
+!
+interface GigabitEthernet0/1
+ description Lien vers coeur de reseau - MAJ
+ switchport access vlan 10
+ no shutdown
+!
+interface GigabitEthernet0/2
+ description Reserve
+ switchport access vlan 20
+ shutdown
+!
+ntp server 10.0.0.1
+banner motd ^ Acces reserve au personnel autorise - NexaCorp ^
