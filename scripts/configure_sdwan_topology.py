@@ -14,7 +14,7 @@ if not VMANAGE_PASS:
 SITE_TOPOLOGY = [
     ("vedge-siege", 100, "mpls"),
     ("vedge-agence1", 101, "biz-internet"),
-    ("vedge-agence2", 102, "biz-internet"),
+    ("vedge-agence2", 102, "biz-internet")
 ]
 
 
